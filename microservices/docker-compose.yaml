@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  api-gateway:
+    image: karthik89k/ms-v2-api-gateway:0.0.1-SNAPSHOT
+    ports:
+      - "8765:8765"
+    networks:
+      - gateway-network
+    depends_on:
+      - naming-server
+    environment:
+      - EUREKA.CLIENT.SERVICE-URL.DEFAULT-ZONE=http://naming-server:8761/eureka
+  naming-server:
+    image: karthik89k/ms-v2-naming-server:0.0.1-SNAPSHOT
+    ports:
+      - "8761:8761"
+    networks:
+      - gateway-network
+networks:
+  gateway-network:
+  
+  
